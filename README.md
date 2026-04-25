@@ -1,272 +1,85 @@
-# 🚀 Ramein Event Management System - Backend
+# Ramein - Event Management System (Backend)
 
-## 🛠️ Tech Stack
+Ramein adalah platform manajemen kegiatan digital yang dirancang untuk mengotomatisasi siklus hidup acara, mulai dari publikasi, manajemen peserta, hingga sistem sertifikasi otomatis.
 
-![Node.js](https://img.shields.io/badge/Node.js-18.x-339933?style=for-the-badge&logo=node.js&logoColor=white)  
-![Express.js](https://img.shields.io/badge/Express.js-4.x-000000?style=for-the-badge&logo=express&logoColor=white)  
-![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)  
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-12+-336791?style=for-the-badge&logo=postgresql&logoColor=white)  
-![TypeORM](https://img.shields.io/badge/TypeORM-0.3.x-F37626?style=for-the-badge&logo=typeorm&logoColor=white)  
-![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?style=for-the-badge&logo=docker&logoColor=white)  
-![JWT](https://img.shields.io/badge/JWT-Authentication-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)  
-![Nodemailer](https://img.shields.io/badge/Nodemailer-Email%20Service-0072C6?style=for-the-badge&logo=gmail&logoColor=white)  
+## Tech Stack
 
----
+* **Runtime:** Node.js (v18+)
+* **Framework:** Express.js with TypeScript
+* **Database:** PostgreSQL
+* **ORM:** TypeORM
+* **Security:** JWT (Access & Refresh Token), RBAC, CORS Whitelisting
+* **Services:** Nodemailer (OTP & Notifications)
+* **DevOps:** Docker, Railway (Deployment)
 
-## 📋 Deskripsi
+## Core Features
 
-🎉 **Ramein** adalah sistem manajemen kegiatan yang dirancang untuk mempermudah pengelolaan event secara digital.  
-Dengan sistem ini, penyelenggara dapat mengatur event, memverifikasi peserta, mengelola sertifikat, dan menghasilkan laporan dengan cepat dan aman.
+### Security & Authentication
+* **Identity Management:** Autentikasi berbasis JWT dengan mekanisme refresh token.
+* **Access Control:** Role-Based Access Control (RBAC) untuk memisahkan hak akses User dan Admin.
+* **Verification:** Sistem verifikasi email berbasis OTP dan prosedur reset password yang aman.
 
----
+### Event & Participant Management
+* **Event Lifecycle:** Manajemen CRUD event dengan validasi jadwal (H-3) dan sistem publikasi.
+* **Discovery:** Fitur pencarian dan filter berdasarkan kategori, rentang tanggal, dan harga.
+* **Attendance:** Pelacakan kehadiran (attendance tracking) secara real-time untuk setiap peserta.
+* **Data Handling:** Fitur bulk import peserta melalui file Excel/CSV.
 
-## ✨ Fitur Utama
+### Certification System
+* **Automated Generation:** Pembuatan sertifikat otomatis dalam format PDF dengan template custom.
+* **Validation:** Verifikasi keaslian sertifikat menggunakan sistem QR Code dan metadata unik.
+* **Revocation:** Sistem pencabutan sertifikat jika terjadi pembatalan status peserta.
 
-### 🔐 Autentikasi & Keamanan
-- 🔑 JWT Authentication (dengan refresh token)
-- 👥 Role-based Access Control (USER, ADMIN)
-- 📧 Email verification (OTP)
-- 🔄 Password reset dengan token aman
-- ⏳ Session timeout management
-- 🌐 CORS protection dengan whitelist domain
+### Admin & Analytics
+* **Dashboard:** Ringkasan statistik performa event, statistik user, dan metrik kehadiran.
+* **Reporting:** Ekspor data laporan (bulanan/per event) ke format Excel, CSV, atau PDF.
 
-### 📅 Manajemen Event
-- 📝 CRUD event dengan validasi tanggal (H-3)
-- 🏷️ Event categories & pricing
-- 🎟️ Event packages untuk berbagai tipe peserta
-- 📢 Event publishing system
-- 🔍 Search & filter event (kategori, tanggal, harga)
-- 🖼️ Event flyer management
+## Project Structure
 
-### 👥 Manajemen Peserta
-- 🆕 Registrasi user dengan verifikasi email
-- 🎫 Pendaftaran event dengan validasi
-- ✅ Attendance tracking (hadir/tidak hadir)
-- 📊 Participant dashboard dengan riwayat event
-- 📥 Bulk import peserta (Excel/CSV)
+```text
+src/
+├── config/      # Database & Environment configurations
+├── controllers/ # Express request handlers
+├── entities/    # Data models (TypeORM)
+├── middlewares/ # Authentication & validation layers
+├── routes/      # API endpoint definitions
+├── services/    # Core business logic
+└── utils/       # Utility functions & helpers
+```
 
-### 🏆 Sistem Sertifikat
-- 🖨️ Generasi sertifikat otomatis
-- 🔎 Verifikasi sertifikat dengan QR code
-- 🧾 Metadata sertifikat untuk tracking
-- 📄 PDF generation dengan template custom
-- 🚫 Sistem pencabutan sertifikat
-
-### 🧑‍💼 Admin Dashboard
-- 📈 Statistik komprehensif (event, peserta, kehadiran)
-- 📆 Laporan bulanan dengan grafik
-- 👨‍👩‍👦 User management & role assignment
-- 🔎 Event analytics & performance tracking
-- 📤 Export data ke Excel/CSV/PDF
-
-### 📊 Reporting & Analytics
-- 📡 Real-time dashboard metrics
-- 📝 Attendance reports per event
-- 👥 Participant statistics dengan filter
-- 📉 Event performance analysis
-- 📂 Data export dalam berbagai format
-
----
-
-## 🚀 Quick Start
+## Setup & Installation
 
 ### Prerequisites
-- ⚡ Node.js **v18+**  
-- 🐘 PostgreSQL **v12+**  
-- 📦 npm atau yarn  
+* Node.js v18+
+* PostgreSQL v12+
 
-### Installation
-```bash
-# Clone repository
-git clone https://github.com/OwlDane/ramein-backend.git
-cd ramein-backend
+### Quick Start
+1.  **Clone Repository**
+    ```bash
+    git clone https://github.com/OwlDane/ramein-backend.git
+    cd ramein-backend
+    ```
+2.  **Install Dependencies**
+    ```bash
+    npm install
+    ```
+3.  **Environment Configuration**
+    Salin file `.env.example` menjadi `.env` dan lengkapi kredensial database serta SMTP email.
+4.  **Database Migration**
+    ```bash
+    npm run db:setup
+    ```
+5.  **Run Development Server**
+    ```bash
+    npm run dev
+    ```
 
-# Install dependencies
-npm install
+## API Documentation
+Dokumentasi API lengkap dapat diakses melalui:
+* **Swagger:** `/api/docs` (jika diaktifkan)
+* **Postman Collection:** Tersedia pada folder `docs/` di repositori ini.
 
-# Setup environment
-cp env.example .env
-# Edit .env dengan konfigurasi database & service
-
-# Setup database
-npm run db:setup
-
-# Jalankan development server
-npm run dev
-````
-
-### Environment Variables
-
-```env
-# Database
-DB_HOST=localhost
-DB_PORT=5432
-DB_USERNAME=your_username
-DB_PASSWORD=your_password
-DB_DATABASE=ramein_db
-
-# JWT
-JWT_SECRET=your_jwt_secret
-JWT_REFRESH_SECRET=your_refresh_secret
-
-# Email
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=your_email@gmail.com
-SMTP_PASS=your_app_password
-
-# Frontend
-FRONTEND_URL=http://localhost:3000
-```
+## License
+Project ini dilisensikan di bawah **ISC License**.
 
 ---
-
-## 📁 Project Structure
-
-```
-src/
-├── config/        # Database & configuration
-├── controllers/   # Request handlers
-├── entities/      # Database models
-├── middlewares/   # Custom middleware
-├── migrations/    # Database migrations
-├── routes/        # API endpoints
-├── services/      # Business logic
-├── utils/         # Helper functions
-└── app.ts         # Express app setup
-```
-
----
-
-## 🔗 API Endpoints
-
-### Authentication
-
-* `POST /api/auth/register` - 🆕 Registrasi user
-* `POST /api/auth/login` - 🔑 Login user
-* `POST /api/auth/verify-email` - 📧 Verifikasi email
-* `POST /api/auth/forgot-password` - 🔄 Reset password request
-* `POST /api/auth/reset-password` - 🔒 Reset password
-
-### Events
-
-* `GET /api/events` - 📋 Ambil semua event
-* `POST /api/events` - 🆕 Buat event baru (Admin only)
-* `PUT /api/events/:id` - ✏️ Update event (Admin only)
-* `DELETE /api/events/:id` - 🗑️ Hapus event (Admin only)
-
-### Participants
-
-* `POST /api/participants/register` - 🎟️ Daftar ke event
-* `GET /api/participants/event/:eventId` - 👥 Ambil peserta event
-* `PUT /api/participants/:id/attendance` - ✅ Update attendance
-
-### Certificates
-
-* `POST /api/certificates/generate` - 🖨️ Generate sertifikat
-* `GET /api/certificates/verify/:number` - 🔎 Verifikasi sertifikat
-* `GET /api/certificates/event/:eventId` - 🏆 Ambil sertifikat event
-
-### Admin
-
-* `GET /api/admin/dashboard` - 📊 Statistik dashboard
-* `GET /api/admin/users` - 👤 User management
-* `GET /api/admin/export/:type` - 📤 Export data
-
----
-
-## 🧪 Testing
-
-```bash
-# Test database connection
-npm run test:db
-
-# Test services
-npm run test:services
-
-# Test repository
-npm run test:repo
-```
-
----
-
-## 📊 Database Schema
-
-**Core Entities**
-
-* **User** - Akun user dengan role-based access
-* **Event** - Data event dengan kategori & packages
-* **Participant** - Registrasi & attendance peserta
-* **Certificate** - Sertifikat & sistem verifikasi
-* **EventPackage** - Pricing tiers event
-* **KategoriKegiatan** - Kategori kegiatan
-
----
-
-## 🚀 Deployment
-
-### Railway Deployment (Recommended)
-
-```bash
-# Install Railway CLI
-npm install -g @railway/cli
-
-# Login and deploy
-railway login
-railway init
-railway up
-```
-
-See [RAILWAY_DEPLOYMENT.md](../RAILWAY_DEPLOYMENT.md) for detailed instructions.
-
-### Production Build (Manual)
-
-```bash
-npm run build
-npm start
-```
-
-### Docker (Optional)
-
-```bash
-docker build -t ramein-backend .
-docker run -p 3001:3001 ramein-backend
-```
-
----
-
-## 📝 API Documentation
-
-📚 Dokumentasi API tersedia di endpoint:
-
-* `/api/docs` (Swagger, jika diaktifkan)
-* Postman collection (disediakan terpisah)
-
----
-
-## 🤝 Contributing
-
-1. 🍴 Fork repository
-2. 🌱 Buat feature branch (`git checkout -b feature/AmazingFeature`)
-3. 💾 Commit perubahan (`git commit -m 'Add some AmazingFeature'`)
-4. 🚀 Push ke branch (`git push origin feature/AmazingFeature`)
-5. 🔀 Open Pull Request
-
----
-
-## 📄 License
-
-📌 Distributed under the **ISC License**.
-Lihat file `LICENSE` untuk detail lebih lanjut.
-
----
-
-## 👥 Team
-
-**Ramein Team** – 🎓 Ujikom Project
-
----
-
-## 📞 Support
-
-💬 Untuk support dan pertanyaan, silakan buat **issue** di repository atau hubungi tim development.
